@@ -1,6 +1,3 @@
-import random
-import math
-
 class ImprovedRandomWalker2D:
     """
     Класс, представляющий точку, совершающую случайное блуждание в 2D. 
