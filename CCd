@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My New GitHub Repository</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #0d1117;
+      color: #e6edf3;
+    }
+    header {
+      padding: 32px 20px;
+      text-align: center;
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+    }
+    header p {
+      margin: 0;
+      opacity: 0.8;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+    section {
+      margin-bottom: 28px;
+      padding: 18px 20px;
+      background: #161b22;
+      border-radius: 10px;
+      border: 1px solid #30363d;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 20px;
+      border-bottom: 1px solid #30363d;
+      padding-bottom: 8px;
+    }
+    code {
+      background: #0d1117;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    pre {
+      background: #0d1117;
+      border-radius: 8px;
+      padding: 12px 14px;
+      overflow-x: auto;
+      border: 1px solid #30363d;
+      font-size: 0.9em;
+    }
+    a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid #30363d;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      opacity: 0.9;
+      margin-right: 6px;
+    }
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      opacity: 0.6;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>my-new-github-repo</h1>
+  <p>Short description of your awesome project goes here ✨</p>
+</header>
+
+<main>
+  <section>
+    <span class="badge">version 0.1.0</span>
+    <span class="badge">status: draft</span>
+    <span class="badge">license: MIT</span>
+  </section>
+
+  <section>
+    <h2>About</h2>
+    <p>
+      This repository contains the source code for <strong>my-new-github-repo</strong>.
+      Replace this text with a brief description of what your project does, why it exists,
+      and who it is for.
+    </p>
+  </section>
+
+  <section>
+    <h2>Features</h2>
+    <ul>
+      <li>✔ Simple and clean project structure</li>
+      <li>✔ Ready to host with GitHub Pages</li>
+      <li>✔ Easy to customize for any idea</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Getting Started</h2>
+    <p>Clone this repository to your local machine:</p>
+    <pre><code>git clone https://github.com/USERNAME/my-new-github-repo.git
+cd my-new-github-repo</code></pre>
+    <p>Open <code>index.html</code> in your browser or host it via GitHub Pages.</p>
+  </section>
+
+  <section>
+    <h2>Repository Links</h2>
+    <p>
+      GitHub: 
+      <a href="https://github.com/USERNAME/my-new-github-repo" target="_blank">
+        https://github.com/USERNAME/my-new-github-repo
+      </a>
+    </p>
+    <p>
+      GitHub Pages (after enabling):<br>
+      <code>https://USERNAME.github.io/my-new-github-repo/</code>
+    </p>
+  </section>
+
+  <div class="footer">
+    Made with ❤ for GitHub. Update this page in <code>index.html</code>.
+  </div>
+</main>
+
+</body>
+</html>
