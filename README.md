@@ -12,8 +12,7 @@
       --text: #e6edf3;
       --accent: #58a6ff;
       --radius: 12px;
-      --shadow: 0 0 20px rgba(0,0,0,0.3);
-    }
+      --shadow: 0 0 20px rgba(0,0,0,0.3)
 
     body {
       margin: 0;
@@ -75,7 +74,6 @@
       font-size: 22px;
       padding-bottom: 10px;
       border-bottom: 1px solid var(--border);
-    }
 
     ul {
       padding-left: 20px;
