@@ -1,188 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>My GitHub Project</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    :root {
-      --bg: #0d1117;
-      --bg-soft: #161b22;
-      --border: #30363d;
-      --text: #e6edf3;
-      --accent: #58a6ff;
-      --radius: 12px;
-      --shadow: 0 0 20px rgba(0,0,0,0.3)
+import random
+import math
 
-    body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: "Inter", system-ui, sans-serif;
-      line-height: 1.55;
-      animation: fadeIn 0.6s ease;
-    }
+class ImprovedRandomWalker2D:
+    """
+    Класс, представляющий точку, совершающую случайное блуждание в 2D. 
+    Включает расчет пройденного расстояния.
+    """
+    def __init__(self, start_x=0.0, start_y=0.0):
+        """Инициализация точки в заданных начальных координатах."""
+        self.start_x = start_x
+        self.start_y = start_y
+        self.x = start_x
+        self.y = start_y
+        self.total_distance = 0.0  # Общее пройденное расстояние
+        self.history = [(self.x, self.y)]
 
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
+    def _calculate_distance(self, x1, y1, x2, y2):
+        """Вычисляет Евклидово расстояние между двумя точками."""
+        # Используем формулу расстояния: d = sqrt((x2 - x1)^2 + (y2 - y1)^2)
+        return math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
 
-    header {
-      text-align: center;
-      padding: 48px 20px 34px;
-      background: var(--bg-soft);
-      border-bottom: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
+    def make_random_step(self, max_distance=5):
+        """
+        Совершает случайный шаг, обновляя координаты и общее пройденное расстояние.
+        """
+        old_x, old_y = self.x, self.y
+        
+        # Случайное изменение по X и Y (могут быть не целыми числами для точности)
+        # random.uniform возвращает float
+        delta_x = random.uniform(-max_distance, max_distance)
+        delta_y = random.uniform(-max_distance, max_distance)
+        
+        self.x += delta_x
+        self.y += delta_y
+        
+        # Расчет расстояния, пройденного на этом шаге
+        step_distance = self._calculate_distance(old_x, old_y, self.x, self.y)
+        self.total_distance += step_distance
+        
+        self.history.append((self.x, self.y))
+        
+        # Возвращаем текущие координаты и расстояние, пройденное на шаге
+        return (self.x, self.y, step_distance)
 
-    header h1 {
-      margin: 0;
-      font-size: 38px;
-      letter-spacing: -0.5px;
-    }
+    def reset(self):
+        """Сбрасывает симуляцию в начальные координаты."""
+        self.x = self.start_x
+        self.y = self.start_y
+        self.total_distance = 0.0
+        self.history = [(self.x, self.y)]
+        print("\nСимуляция сброшена до начальной точки.")
 
-    header p {
-      margin-top: 10px;
-      font-size: 16px;
-      opacity: 0.85;
-    }
+# --- Основная часть программы ---
 
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 32px 20px 60px;
-    }
+NUM_STEPS = random.randint(5, 12)
+MAX_STEP_SIZE = random.randint(3, 8)
 
-    section {
-      background: var(--bg-soft);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px 26px;
-      margin-bottom: 26px;
-      transition: transform 0.2s ease, border-color 0.3s ease;
-    }
+walker = ImprovedRandomWalker2D(start_x=0.0, start_y=0.0)
 
-    section:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent);
-    }
+print(f"--- 📈 УЛУЧШЕННЫЙ СИМУЛЯТОР СЛУЧАЙНОГО БЛУЖДАНИЯ (2D) ---")
+print(f"Начало: ({walker.start_x}, {walker.start_y}) | Шагов: {NUM_STEPS} | Макс. шаг: +/- {MAX_STEP_SIZE:.1f}")
+print("-" * 65)
 
-    h2 {
-      margin-top: 0;
-      font-size: 22px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border);
+for i in range(NUM_STEPS):
+    x, y, dist = walker.make_random_step(MAX_STEP_SIZE)
+    # Используем f-строки для красивого форматирования
+    print(f"| Шаг {i+1:2d} | Координаты: ({x:8.3f}, {y:8.3f}) | Дистанция шага: {dist:6.3f} |")
 
-    ul {
-      padding-left: 20px;
-    }
+# --- Результаты ---
 
-    code {
-      background: #0d1117;
-      padding: 3px 6px;
-      border-radius: 6px;
-      font-size: 0.95em;
-      border: 1px solid var(--border);
-    }
+final_x, final_y = walker.history[-1]
+# Расстояние от начальной точки
+distance_from_start = walker._calculate_distance(walker.start_x, walker.start_y, final_x, final_y)
 
-    pre {
-      background: #0d1117;
-      padding: 16px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      font-size: 0.95em;
-      overflow-x: auto;
-    }
+print("-" * 65)
+print(f"**ИТОГО:**")
+print(f"   Финальные координаты: ({final_x:.3f}, {final_y:.3f})")
+print(f"   Пройденное расстояние (общее): {walker.total_distance:.3f}")
+print(f"   Расстояние от старта (по прямой): {distance_from_start:.3f}")
+print("-" * 65)
 
-    .badge {
-      display: inline-block;
-      padding: 4px 12px;
-      font-size: 11px;
-      text-transform: uppercase;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      margin-right: 8px;
-      margin-bottom: 8px;
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: 0.2s ease;
-    }
-
-    a:hover {
-      text-decoration: underline;
-      color: #79b8ff;
-    }
-
-    footer {
-      text-align: center;
-      opacity: 0.6;
-      font-size: 13px;
-      padding: 20px 0 40px;
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <h1>my-new-github-project</h1>
-  <p>A modern, clean starter page for your GitHub repository 🚀</p>
-</header>
-
-<main>
-
-  <section>
-    <span class="badge">version 1.0.0</span>
-    <span class="badge">status: active</span>
-    <span class="badge">license: MIT</span>
-  </section>
-
-  <section>
-    <h2>About</h2>
-    <p>
-      This project serves as a clean, modern template for GitHub repositories.
-      You can customize it, extend it, or use it as a base for documentation,
-      landing pages, or portfolio projects.
-    </p>
-  </section>
-
-  <section>
-    <h2>Features</h2>
-    <ul>
-      <li>⚡ Modern UI with dark mode and animations</li>
-      <li>📄 Easy to customize structure</li>
-      <li>✨ Optimized for GitHub Pages</li>
-      <li>💻 Clean code and typography</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Installation</h2>
-    <p>Clone the repository:</p>
-    <pre><code>git clone https://github.com/USERNAME/my-new-github-project.git
-cd my-new-github-project</code></pre>
-  </section>
-
-  <section>
-    <h2>Links</h2>
-    <p>
-      Repository: <a href="https://github.com/USERNAME/my-new-github-project" target="_blank">GitHub Link</a>
-    </p>
-    <p>
-      GitHub Pages: <code>https://USERNAME.github.io/my-new-github-project/</code>
-    </p>
-  </section>
-
-</main>
-
-<footer>
-  Created with ❤️ — customize in <code>index.html</code>.
-</footer>
-
-</body>
-</html>
+# Демонстрация метода сброса
+walker.reset()
